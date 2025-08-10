@@ -1,5 +1,7 @@
 # CFD Simulation of a 90° Pipe Elbow – Power Loss Analysis
 
+![Pressure Arrows](./images/13_2.png)
+
 ## Abstract
 This project investigates the pressure drop and power loss in a smooth 90° pipe elbow using free and open-source software.  
 A complete CAD → Mesh → CFD → Post-processing workflow was implemented:
