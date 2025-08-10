@@ -1,0 +1,70 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+ = ========                 |                                                  **
+ \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+ \\    /   O peration     | Website:  https://openfoam.org
+ \\  /    A nd           | Version:  12
+ \\/     M anipulation  |
+ \*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// *                  ** //
+application     simpleFoam;
+startFrom       latestTime;
+startTime       0;
+stopAt          endTime;
+endTime         5000;
+deltaT          1;
+writeControl    timeStep;
+writeInterval   500;
+purgeWrite      2;
+writeFormat     ascii;
+writePrecision  6;
+writeCompression off;
+timeFormat      general;
+timePrecision   6;
+runTimeModifiable true;
+functions
+{
+    #includeFunc  patchFlowRate(name=Inlet, patch=Inlet)
+    #includeFunc  patchFlowRate(name=Outlet, patch=Outlet)
+    #includeFunc  residuals
+
+    // Fixed pressure monitoring function
+    pressureMonitor
+    {
+        type            surfaceFieldValue;
+        libs            ("libfieldFunctionObjects.so");
+
+        fields          (p);
+        operation       areaAverage;  // Changed from mode total
+        regionType      patch;
+        name            Inlet;        // Monitor inlet pressure
+
+        writeControl    timeStep;
+        writeInterval   500;
+        writeFields     false;
+    }
+
+    // Optional: Monitor outlet pressure too
+    pressureOutlet
+    {
+        type            surfaceFieldValue;
+        libs            ("libfieldFunctionObjects.so");
+
+        fields          (p);
+        operation       areaAverage;
+        regionType      patch;
+        name            Outlet;
+
+        writeControl    timeStep;
+        writeInterval   500;
+        writeFields     false;
+    }
+}
+// ************************************************************************* //
