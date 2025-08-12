@@ -1,12 +1,12 @@
-# CFD Simulation of a 90° Pipe Elbow – Power Loss Analysis
+# CFD Simulation of a 90° Pipe Bend – Power Loss Analysis
 
 ![Pressure Arrows](./images/13_2.png)
 
 ## Abstract
-This project investigates the pressure drop and power loss in a smooth 90° pipe elbow using free and open-source software.  
+This project investigates the pressure drop and power loss in a smooth 90° pipe bend using free and open-source software.  
 A complete CAD → Mesh → CFD → Post-processing workflow was implemented:
 
-1. **FreeCAD** – 3D modeling of the elbow geometry.  
+1. **FreeCAD** – 3D modeling of the pipe bend geometry.  
 2. **Salome** – Mesh generation, defining inlet, outlet, and wall groups.  
 3. **OpenFOAM v12** – Steady-state RANS simulation (simpleFoam) with the kOmegaSST turbulence model.
 4. **ParaView** – Post-processing, visualization, and pressure integration.
